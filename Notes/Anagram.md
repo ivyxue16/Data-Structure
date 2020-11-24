@@ -1,4 +1,3 @@
-# “变位词”问题
 # 1. 问题描述
 变位词是指两个词存在组成字母的重新排列问题。
 例如：heart 和 earth、python和typhon
@@ -12,24 +11,23 @@ $f(S_1,S_2)$ >>> True或False
 # 3.解法比较
 ## 3.1 解法一：逐字检查
 ### 3.1.1 解题思路
-将字符串$S_1$中的每个字符逐一到$S_2$中寻找相同的字符，如果能找到，就对$S_2$中的该字符进行打钩(避免重复检查)。如果每个字符都能找到对应的字符，则二者是变位词；如果有一个字符没有找到对应字符，则不是变位词。
+将字符串 $S_1$ 中的每个字符逐一到 $S_2$ 中寻找相同的字符，如果能找到，就对 $S_2$ 中的该字符进行打钩(避免重复检查)。如果每个字符都能找到对应的字符，则二者是变位词；如果有一个字符没有找到对应字符，则不是变位词。
 
 ### 3.1.2 程序技巧
-1. 实现打钩标记：将$S_2$中找到的字符设置为**None**
+1. 实现打钩标记：将 $S_2$ 中找到的字符设置为**None**
 2. 由于字符串为不可变类型，因此将初始的字符串转化为列表
 
 ### 3.1.3 算法分析
-1. 问题规模：词中包含的字符个数$n$
+1. 问题规模：词中包含的字符个数 $n$
 2. 主要部分：在于两重循环
-外层循环遍历$S_1$的每个字符，将内层循环执行n次；
-内层循环在$S_2$中寻找字符，每个字符遍历的次数分别为$1，2，…，n$中的一次，且各不相同。
+外层循环遍历 $S_1$ 的每个字符，将内层循环执行 $n$ 次；
+内层循环在$S_2$中寻找字符，每个字符遍历的次数分别为$1，2，…，n$ 中的一次，且各不相同。
 
-总执行次数为$\sum_{i=1}^ni=1+2+…+n=\frac{n(n+1)}{2}=\frac{n^2}{2}+\frac{n}{2}$
-可知数量级为$O(n^2)$
+总执行次数为 $\sum_{i=1}^ni=1+2+…+n=\frac{n(n+1)}{2}=\frac{n^2}{2}+\frac{n}{2}$
+可知数量级为 $O(n^2)$
 
 ### 3.1.4 代码
 ```
-\\Python
 def anagram1(s1,s2):
     pos1 = 0
     list2 = list(s2)
@@ -67,6 +65,20 @@ list1.sort()
 所以在排序比较中，主导算法时间的是排序步骤。因此，本算法的运行数量级为$O(n^2)$或$O(nlog(n))$。
 
 ### 3.2.3 代码
+```
+
+def anagram2(s1,s2):
+  list1 = list(s1)
+  list2 = list(s2)
+  list1.sort()
+  list2.sort()
+  stillOK = True
+  for i in range(len(s1)):
+    if list1[i] != list2[i]:
+        stillOK = False
+        break
+  return stillOK
+```
 
 ## 3.3 解法三：暴力求解
 暴力算法是指穷尽所有可能的组合。
@@ -93,3 +105,40 @@ $n$个字符进行全排列，根据组合数学的知识，所有可能的结�
 *注：本算法依赖于两个长度为26的计数器，需占用更多的存储空间。牺牲存储空间来换取运行时间，或反之，在选择问题解法的过程中经常出现。需在二者之间进行权衡。
 
 ### 3.4.3 代码
+## using counting list
+```
+def anagram4(s1,s2):
+  count1 = [0]*26
+  count2 = [0]*26
+  stillOK = True
+  for i in range(len(s1)):
+    pos = ord(s1[i]) - ord("a")
+    count1[pos] = count1[pos] + 1
+  for i in range(len(s2)):
+    pos = ord(s2[i]) - ord("a")
+    count2[pos] = count2[pos] + 1
+  for i in range(len(count1)):
+      if count1[i] != count2[i]:
+          stillOK = False
+  return stillOK
+```
+## using dictionary
+```
+def anagram4(s1,s2):
+    dict1 = dict()
+    dict2 = dict()
+    stillOK = True
+    for c in s1:
+        if c not in dict1:
+            dict1[c] = 1
+        else:
+            dict1[c] += 1
+    for c in s2:
+        if c not in dict2:
+            dict2[c] = 1
+        else:
+            dict2[c] += 1
+    return dict1 == dict2
+            
+```
+
