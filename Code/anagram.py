@@ -33,6 +33,19 @@ def anagram1(s1,s2):
     return stillOK
 
 
+def anagram2(s1,s2):
+    list1 = list(s1)
+    list2 = list(s2)
+    list1.sort()
+    list2.sort()
+    stillOK = True
+    for i in range(len(s1)):
+        if list1[i] != list2[i]:
+            stillOK = False
+            break
+    return stillOK
+
 if __name__ == "__main__":
-    print(anagram1('python','typhon'))
+    print(anagram2('hhhhhh','typhon'))
+    
 
