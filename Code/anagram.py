@@ -73,7 +73,7 @@ def anagram3(s1,s2):
 
 def anagram4(s1,s2):
     '''
-    This function will count the frequency of 26 characters in s1,s2 using a 26 characters list. 
+    This function will count the frequency of 26 characters in s1,s2 using dictionary. 
     find out whether the counts are exactly the same.
     This is O(n) algorithm depending on sorting method.
     '''
