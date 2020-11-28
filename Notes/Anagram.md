@@ -127,7 +127,6 @@ def anagram4(s1,s2):
 def anagram4(s1,s2):
     dict1 = dict()
     dict2 = dict()
-    stillOK = True
     for c in s1:
         if c not in dict1:
             dict1[c] = 1
