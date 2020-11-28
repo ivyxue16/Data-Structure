@@ -1,3 +1,5 @@
+from timeit import Timer
+import timeit
 def test1():
     l = []
     for i in range(1000):
@@ -14,7 +16,6 @@ def test3():
 def test4():
     l = list(range(1000))
 
-from timeit import Timer
 t1 = Timer("test1()","from __main__ import test1")
 print("concat %f second\n" %t1.timeit(number=1000))
 
@@ -26,3 +27,9 @@ print("comprehension %f second\n" %t3.timeit(number=1000))
 
 t4 = Timer("test4()","from __main__ import test4")
 print("list range %f second\n" %t4.timeit(number=1000))
+
+x = list(range(2000000))
+popzero = timeit.Timer("x.pop(0)","from __main__ import x")
+popend = timeit.Timer("x.pop()","from __main__ import x")
+print(popzero.timeit(number=1000))
+print(popend.timeit(number=1000))
