@@ -75,7 +75,7 @@ list range 0.011573 second
 
 ### 4. List基本操作的大O数量级
 |Operation|Big-O Efficiency|
-|:-----:|:-----:|:-----:|
+|:-----:|:-----:|
 |index[]|O(1)|
 |index assignment|O(1)|
 |append|O(1)|
@@ -103,7 +103,7 @@ pop()的时间不随list大小变化，pop(0)的时间随着list变大而变长
 ### 5.Dict基本操作的大O数量级
 字典根据关键码(key)找到数据项，而列表是根据位置(index)
 |Operation|Big-O Efficiency|
-|:-----:|:-----:|:-----:|
+|:-----:|:-----:|
 |copy|O(n)|
 |get item|O(1)|
 |set item|O(1)|
