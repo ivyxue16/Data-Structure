@@ -23,11 +23,11 @@ def convertToBase7(num: int):
 
 
 def convertToBaseN(num: int, base: int):
-        s = []
-        digit = '0123456789ABCDEF'
+        s = [] # create a stack
+        digit = '0123456789ABCDEF' # 16-digit converter
         if num > 0:
             while num > 0:
-                rem = num % base
+                rem = num % base 
                 s.append(rem)
                 num = num // base
             newstring = ""
@@ -43,6 +43,7 @@ def convertToBaseN(num: int, base: int):
             while len(s) > 0:
                 newstring = newstring + digit[s.pop()] 
         else:
+            # num is 0
             return "0"
         return newstring
 
