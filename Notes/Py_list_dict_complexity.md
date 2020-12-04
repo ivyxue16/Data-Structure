@@ -1,4 +1,4 @@
-研究列表list和字典dict的各种操作的大O数量级
+# 研究列表list和字典dict的各种操作的大O数量级
 
 ### 1. 对比list和dict的不同操作
 |类型|list|dict|
