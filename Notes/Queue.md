@@ -21,7 +21,7 @@ Queue是个有次序的数据集合，数据项仅添加到"尾端Rear"，而且
 **isEmpty()**: 返回队列是否为空队列
 **size()**: 返回队列中有多少个数据项
 
-**Stack操作例子**
+### **Stack操作例子**
 |Stack Operation|Stack Contents|Return Value|
 |:-----|:-----|:-----|
 |s = Queue()|[]|Queue Object|
