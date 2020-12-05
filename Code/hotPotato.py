@@ -12,7 +12,7 @@ names: a list containing all the children names.
 num: after num chilren, the next children will go out of the circle
 
 The function will return postfix notation
-Return: str
+Return: str: the last child in the game
 '''
 
 from ADT_Queue import Queue
@@ -34,4 +34,4 @@ def hot_potato(names:List[str], num:int) -> str:
 
 
 if __name__ == "__main__":
-    print(hot_potato(('Bill', 'David', 'Susan', 'Jane', 'Kent', 'Brad'), 5))
+    print(hot_potato(('Bill', 'Davzid', 'Susan', 'Jane', 'Kent', 'Brad'), 5))
