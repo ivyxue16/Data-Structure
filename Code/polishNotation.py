@@ -1,10 +1,10 @@
 '''
 Author: Ivy Xue
-Time: 12/3/2020
-This file converts infix notation to postfix notation.
+Time: 12/6/2020
+This file will determine whether a character is a palindromic word.
 Input Parameter: str
-The function will return postfix notation
-Return: str
+The function will return True/False
+Return: bool
 '''
 
 
