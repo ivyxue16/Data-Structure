@@ -5,7 +5,7 @@ class OrderedList(UnorderedList):
         self.head = None
     
     def size(self):
-        # O(1)
+        # O(n)
         current = self.head
         count = 0 
         while current != None:
