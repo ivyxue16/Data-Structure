@@ -5,8 +5,6 @@ This file solves Valid Prantheses Problem.
 
 '''
 
-
-
 from ADT_Stack import Stack
 
 def praChecker(symbolString):
