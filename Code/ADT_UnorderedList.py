@@ -17,19 +17,27 @@ class UnorderedList:
         self.head = None
 
     def add(self,item):
+        # O(1)
         temp = Node(item)
         temp.setNext(self.head)
         self.head = temp
 
     def size(self):
-        # O(n)
+        # O(1)
         current = self.head
         count = 0 
         while current != None:
             count = count + 1
             current = current.getNext()
         return count
-        
+
+    def isEmpty(self):
+        # O(1)
+        if self.head == None:
+            return True
+        else:
+            return False
+
     def search(self,item):
         current = self.head
         found = False
@@ -60,3 +68,15 @@ class UnorderedList:
 
 # temp = Node(93)
 # print(temp.getData())
+
+if __name__ == "__main__":
+    mylist = UnorderedList()
+    print(mylist.isEmpty())
+    mylist.add(31)
+    print(mylist.isEmpty())
+    mylist.add(77)
+    mylist.add(17)
+    mylist.add(93)
+    mylist.add(26)
+    mylist.add(54)
+    print(mylist.isEmpty())
