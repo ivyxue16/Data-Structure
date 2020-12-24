@@ -44,9 +44,17 @@ def baseConvert(num:int,base:int) -> str:
 # print(baseConvert(1453,16)) 5AD
 
 
-'''
+
 import turtle
 t = turtle.Turtle()
+'''
+t.pencolor('red')
+t.pensize(3)
+for i in range(5):
+    t.forward(100)
+    t.right(144)
+turtle.done()
+'''
 
 def drawSpiral(t,linelen):
     
@@ -60,7 +68,7 @@ def drawSpiral(t,linelen):
 
 # drawSpiral(t,100)
 # turtle.done()
-'''
+
 
 def reverselist(numlist:List) ->List:
     '''
@@ -71,4 +79,15 @@ def reverselist(numlist:List) ->List:
     else:
         return [numlist[-1]] + reverselist(numlist[:-1])
 
-print(reverselist([1,2,3,4,5,6]))
+# print(reverselist([1,2,3,4,5,6]))
+
+def drawspiral2(t,linelen):
+
+    if linelen > 0: # use if not while
+        t.backward(linelen)
+        t.left(90)
+        drawspiral2(t,linelen - 5)
+
+# drawspiral2(t,100)
+# turtle.done()
+
