@@ -138,7 +138,7 @@ Recursion example: Sierpinski Triangle
 '''
 from turtle import *
 
-def drawTriangle(points,color,myTurtle):
+def drawTriangle(points:List,color:List,myTurtle) -> None:
     myTurtle.fillcolor(color)
     myTurtle.up()
     myTurtle.goto(points[0])
@@ -149,19 +149,21 @@ def drawTriangle(points,color,myTurtle):
     myTurtle.goto(points[0])
     myTurtle.end_fill()
 
-def getMid(p1,p2): 
+def getMid(p1:tuple,p2:tuple)->tuple: 
     return ((p1[0]+p2[0])/2, (p1[1]+p2[1])/2)
 
-def sierpinski(points,degree,myTurtle):
+def sierpinski(points:List,degree:int,myTurtle):
     colormap = ['blue','red','green','white','yellow','violet','orange']
     drawTriangle(points,colormap[degree],myTurtle)
     if degree > 0:
+        # iteration all points at the same degree
         sierpinski([points[0],getMid(points[0],points[1]),getMid(points[0],points[2])],degree-1,myTurtle)
         sierpinski([points[1],getMid(points[1],points[0]),getMid(points[1],points[2])],degree-1,myTurtle)
         sierpinski([points[2],getMid(points[2],points[0]),getMid(points[2],points[1])],degree-1,myTurtle)
-    
+'''
 myTurtle = Turtle()
 myWin = myTurtle.getscreen()
-myPoints = [(-300,-150),(0,300),(300,-150)]
+myPoints = [(-300,-150),(0,300),(300,-150)]  # list of 3 tuples
 sierpinski(myPoints,2,myTurtle)
 myWin.exitonclick()
+'''
