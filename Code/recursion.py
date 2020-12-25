@@ -4,6 +4,7 @@ This file is the illustration of recursion.
 """
 
 from typing import List
+import turtle
 
 '''
 import sys
@@ -44,10 +45,10 @@ def baseConvert(num:int,base:int) -> str:
 # print(baseConvert(1453,16)) 5AD
 
 
-
+'''
 import turtle
 t = turtle.Turtle()
-'''
+
 t.pencolor('red')
 t.pensize(3)
 for i in range(5):
@@ -90,4 +91,43 @@ def drawspiral2(t,linelen):
 
 # drawspiral2(t,100)
 # turtle.done()
+'''
 
+def tree(branch_len):
+    if branch_len > 0:
+        t.forward(branch_len)
+        t.right(20)
+        tree(branch_len - 30)
+        t.left(40)
+        tree(branch_len - 30)
+        t.right(20)
+        t.backward(branch_len)
+        
+
+t = turtle.Turtle()
+t.left(90)
+t.penup()
+t.backward(100)
+t.pendown()
+t.pencolor = 'green'
+t.pensize(2)
+tree(120)
+turtle.done()
+'''
+
+
+def fab(n):
+    '''
+    Time complexity is O(2^n)
+    Space complexity is O(n)
+    '''
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    else:
+        return fab(n-1) + fab(n-2)
+
+# print(fab(2)) 1
+# print(fab(5)) 5
+# print(fab(20)) 6765
