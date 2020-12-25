@@ -160,10 +160,9 @@ def sierpinski(points:List,degree:int,myTurtle):
         sierpinski([points[0],getMid(points[0],points[1]),getMid(points[0],points[2])],degree-1,myTurtle)
         sierpinski([points[1],getMid(points[1],points[0]),getMid(points[1],points[2])],degree-1,myTurtle)
         sierpinski([points[2],getMid(points[2],points[0]),getMid(points[2],points[1])],degree-1,myTurtle)
-'''
+
 myTurtle = Turtle()
 myWin = myTurtle.getscreen()
 myPoints = [(-300,-150),(0,300),(300,-150)]  # list of 3 tuples
-sierpinski(myPoints,2,myTurtle)
+sierpinski(myPoints,5,myTurtle)
 myWin.exitonclick()
-'''
