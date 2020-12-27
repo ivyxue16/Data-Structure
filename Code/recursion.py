@@ -161,8 +161,21 @@ def sierpinski(points:List,degree:int,myTurtle):
         sierpinski([points[1],getMid(points[1],points[0]),getMid(points[1],points[2])],degree-1,myTurtle)
         sierpinski([points[2],getMid(points[2],points[0]),getMid(points[2],points[1])],degree-1,myTurtle)
 
+'''
 myTurtle = Turtle()
 myWin = myTurtle.getscreen()
 myPoints = [(-300,-150),(0,300),(300,-150)]  # list of 3 tuples
 sierpinski(myPoints,5,myTurtle)
 myWin.exitonclick()
+'''
+
+def moveTower(height,fromPole,withPole,toPole):
+    if height >= 1:
+        moveTower(height-1,fromPole,toPole,withPole)
+        moveDisk(height,fromPole,toPole)
+        moveTower(height-1,withPole,fromPole,toPole)
+
+def moveDisk(disk,fromPole,toPole):
+    print(f"Moving disk[{disk}] from {fromPole} to {toPole}")
+
+moveTower(3,"#1","#2","#3")
