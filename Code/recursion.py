@@ -169,13 +169,18 @@ sierpinski(myPoints,5,myTurtle)
 myWin.exitonclick()
 '''
 
+
 def moveTower(height,fromPole,withPole,toPole):
+    '''
+    This function solves the Tower of Hanoi problem
+    '''
     if height >= 1:
         moveTower(height-1,fromPole,toPole,withPole)
         moveDisk(height,fromPole,toPole)
         moveTower(height-1,withPole,fromPole,toPole)
 
 def moveDisk(disk,fromPole,toPole):
+    '''This function print out the path of a disk'''
     print(f"Moving disk[{disk}] from {fromPole} to {toPole}")
 
-moveTower(3,"#1","#2","#3")
+# moveTower(3,"#1","#2","#3")
