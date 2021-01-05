@@ -202,7 +202,7 @@ def rec(change,coins):
 
 
 ### find min number of coins 
-### use knownresult to store values 
+### use knownresult to store values
 def recDC(change:int,coins:List,knownresult:List) -> int:
     minCoins = change
     if change in coins:
@@ -211,10 +211,11 @@ def recDC(change:int,coins:List,knownresult:List) -> int:
         return knownresult[change]
     else:
         for i in [c for c in coins if c <= change]:
-            sumCoins = 1 + rec(change-i,coins)
+            sumCoins = 1 + recDC(change-i,coins,knownresult)
             if sumCoins < minCoins:
                 minCoins = sumCoins
                 knownresult[change] = minCoins
     return minCoins
 
-print(recDC(63,[1,5,10,25],[0]*64))
+# x = 101
+# print(recDC(x,[1,5,10,21,25],[0]*(x+1)))
