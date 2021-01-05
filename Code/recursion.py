@@ -184,3 +184,37 @@ def moveDisk(disk,fromPole,toPole):
     print(f"Moving disk[{disk}] from {fromPole} to {toPole}")
 
 # moveTower(3,"#1","#2","#3")
+
+
+### find min number of coins 
+def rec(change,coins):
+    minCoins = change
+    if change in coins:
+        return 1
+    else:
+        for i in [c for c in coins if c <= change]:
+            sumCoins = 1 + rec(change-i,coins)
+            if sumCoins < minCoins:
+                minCoins = sumCoins
+    return minCoins
+
+# print(rec(43,[1,2,5,10,25]))
+
+
+### find min number of coins 
+### use knownresult to store values 
+def recDC(change:int,coins:List,knownresult:List) -> int:
+    minCoins = change
+    if change in coins:
+        return 1
+    elif knownresult[change] > 0:
+        return knownresult[change]
+    else:
+        for i in [c for c in coins if c <= change]:
+            sumCoins = 1 + rec(change-i,coins)
+            if sumCoins < minCoins:
+                minCoins = sumCoins
+                knownresult[change] = minCoins
+    return minCoins
+
+print(recDC(63,[1,5,10,25],[0]*64))
