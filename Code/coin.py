@@ -1,46 +1,48 @@
 from typing import List
 
+### find min number of coins 
 
-'''
-def numCoin(money,coinList):
-    numofCoin = []
-    while money > 0:
-        for coin in coinList:
-            if money >= coin and money % coin == 0:
-                numofCoin.append(money % coin)
-        a = max(coinList)
-        if money > a:
-            numCoin(money-a,coinList)
-        else:
-            coinList = coinList[:-1]
-        return max(numCoin)
-
-money = 63
-coinList = [1,5,10,21,25]
-print(numCoin(money,coinList))
-'''
-
-
-
-def recMC(coinList:List,change:int,knowResult) -> int:
-    '''
-    This function will return the least number of coins used to give the change.
-    '''
+ # 1. slow
+def rec(change,coins):
     minCoins = change
-    if change in coinList:
-        knowResult[change] = 1
+    if change in coins:
         return 1
-    elif knowResult[change] > 0 :
-        return knowResult[change]
     else:
-        for i in [c for c in coinList if c <= change]:
-            numCoins = 1 + recMC(coinList,change-i,knowResult)
-        if numCoins < minCoins:
-            minCoins = numCoins
-            knowResult[change] = minCoins
+        for i in [c for c in coins if c <= change]:
+            sumCoins = 1 + rec(change-i,coins)
+            if sumCoins < minCoins:
+                minCoins = sumCoins
     return minCoins
 
-coinList = [1,5,10,21,25]
-change = 63
-knowResult = 64 * [0]
-print(recMC(coinList,change,knowResult))
+# print(rec(43,[1,2,5,10,25])) 
+
+# 2. more efficient 
+def recDC(change:int,coins:List,knownresult:List) -> int:
+    '''
+    This function aims to find out minimum number of coins 
+    '''
+    minCoins = change
+    if change in coins:
+        return 1
+    elif knownresult[change] > 0:
+        # use knownresult to store values, 
+        # if the number of coins have already been calculated
+        # the min coins will be stored for further use
+        return knownresult[change]
+    else:
+        for i in [c for c in coins if c <= change]:
+            sumCoins = 1 + recDC(change-i,coins,knownresult)
+            if sumCoins < minCoins:
+                minCoins = sumCoins
+                knownresult[change] = minCoins
+    return minCoins
+
+# x = 101
+# print(recDC(x,[1,5,10,21,25],[0]*(x+1)))
+
+
+
+
+# 3.
+def hjcdc(change:int,coins:List,knownresult:List) -> int:
+    pass
