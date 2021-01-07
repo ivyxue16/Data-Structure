@@ -3,7 +3,7 @@ from typing import List
 ### Find min number of coins 
 
  # 1. recursion --  very slow 
- # repeated operations
+ # Redundant computations
 def rec(change,coins):
     minCoins = change
     if change in coins:
