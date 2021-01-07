@@ -58,3 +58,18 @@ def dpCoins(change:int, coins:list,minCoins:list) -> int:
 
 
 # print(dpCoins(63,[1,5,10,21,25],[0] * 64))
+
+## Dynamic programming
+def dpCoins2(change:int, coins:list) ->int:
+    minCoins = [float('inf')] * (change + 1)
+    minCoins[0] = 0
+    for cent in range(1,change+1):
+        for i in [c for c in coins if c <= change]:
+            minCoins[cent] = min(minCoins[cent], minCoins[cent-i] + 1)
+    if minCoins[change] != float('inf'):
+        return minCoins[change]
+    else:
+        return -1
+
+# print(dpCoins2(5,[2])) 
+# print(dpCoins2(63,[1,5,10,21,25]))
