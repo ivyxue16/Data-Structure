@@ -73,3 +73,37 @@ def dpCoins2(change:int, coins:list) ->int:
 
 # print(dpCoins2(5,[2])) 
 # print(dpCoins2(63,[1,5,10,21,25]))
+
+### Print coin used
+def dpCoins3(change:int, coins:list,minCoins:list,coinUsed) -> int:
+    '''
+    Use dynamic programming to calculate the minimum number of coins and which coins are used
+    '''
+    for cent in range(1,change+1):
+        coinCount = cent
+        newcoin = 1
+        for i in [c for c in coins if c <= cent]:
+            if minCoins[cent-i] + 1 <= coinCount:
+                coinCount = minCoins[cent-i] + 1
+                newcoin = i
+        minCoins[cent] = coinCount
+        coinUsed[cent] = newcoin
+    return minCoins[change]
+
+
+def printCoin(coinUsed:list,change:int):
+    '''
+    Print which coin is used when calculating minimum number of coins
+    '''
+    coin = change
+    while coin > 0:
+        thiscoin =  coinUsed[coin]
+        print(thiscoin)
+        coin = coin - thiscoin
+
+# c1 = [1,5,10,25,21]
+# coinUsed = [0]*64
+# coinCount = [0]*64
+# dpCoins3(63, c1,coinCount,coinUsed)
+
+# printCoin(coinUsed,63) # coinUsed is updated after calling function 'dpCoins3' 
