@@ -91,7 +91,7 @@ def dpCoins3(change:int, coins:List,minCoins:List,coinUsed) -> int:
     return minCoins[change]
 
 
-def printCoin(coinUsed:List,change:int):
+def printCoin(coinUsed:list,change:int):
     '''
     Print which coin is used when calculating minimum number of coins
     '''
