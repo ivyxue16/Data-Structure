@@ -47,7 +47,7 @@ def recDC(change:int,coins:List,knownresult:List) -> int:
 
 # 3. Dynamic Programming -- fast
 # not recursion
-def dpCoins(change:int, coins:list,minCoins:list) -> int:
+def dpCoins(change:int, coins:List,minCoins:List) -> int:
     for cent in range(1,change+1):
         coinCount = cent
         for i in [c for c in coins if c <= cent]:
@@ -60,7 +60,7 @@ def dpCoins(change:int, coins:list,minCoins:list) -> int:
 # print(dpCoins(63,[1,5,10,21,25],[0] * 64))
 
 ## Dynamic programming
-def dpCoins2(change:int, coins:list) ->int:
+def dpCoins2(change:int, coins:List) ->int:
     minCoins = [float('inf')] * (change + 1)
     minCoins[0] = 0
     for cent in range(1,change+1):
@@ -75,7 +75,7 @@ def dpCoins2(change:int, coins:list) ->int:
 # print(dpCoins2(63,[1,5,10,21,25]))
 
 ### Print coin used
-def dpCoins3(change:int, coins:list,minCoins:list,coinUsed) -> int:
+def dpCoins3(change:int, coins:List,minCoins:List,coinUsed) -> int:
     '''
     Use dynamic programming to calculate the minimum number of coins and which coins are used
     '''
@@ -91,7 +91,7 @@ def dpCoins3(change:int, coins:list,minCoins:list,coinUsed) -> int:
     return minCoins[change]
 
 
-def printCoin(coinUsed:list,change:int):
+def printCoin(coinUsed:List,change:int):
     '''
     Print which coin is used when calculating minimum number of coins
     '''
