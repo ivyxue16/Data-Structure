@@ -20,6 +20,24 @@ testlist = [1,2,32,8,17,19,42,13,0]
 # print(sequentialSearch(testlist,42))
 # print(sequentialSearch(testlist,18))
 
+def orderedSequentialSearch(searchList:List, item):
+    pos = 0
+    found = False
+    stop = False
+
+    while pos < len(searchList) and not found and not stop:
+        if searchList[pos] == item:
+            return True
+        else:
+            if searchList[pos] > item:
+                stop = True
+                return False
+            else:
+                pos += 1
+    return found
+
+# print(orderedSequentialSearch(testlist,42))
+# print(sequentialSearch(testlist,18))
 
 
 def binarySearch(alist:List,item:int) -> bool:
@@ -36,7 +54,6 @@ def binarySearch(alist:List,item:int) -> bool:
 
     while first <= last and not found: # not found must be included
         mid = (first + last) // 2 
-        print(mid,first,last)
         if alist[mid] == item:
             return True
         else:
@@ -49,3 +66,41 @@ def binarySearch(alist:List,item:int) -> bool:
 
 testlist = [1,2,32,8,17,19,42,13,0]
 # print(binarySearch(testlist,41))
+# print(binarySearch(testlist,42))
+
+
+def binarySearchRec(alist:List,item:int) -> bool:
+    '''
+    Use recursion to do binary search
+    Input parameters:
+    alist: search list, in ascending order
+    item: the target
+    '''
+
+    if len(alist) == 0:
+        return False
+   
+    first = 0
+    last = len(alist) - 1
+
+    found = False
+
+    while first <= last and not found: # not found must be included
+        mid = (first + last) // 2 
+        if alist[mid] == item:
+            return True
+        else:
+            if alist[mid] < item:  
+                return binarySearchRec(alist[mid+1:],item)
+            else: 
+                return binarySearchRec(alist[:mid],item)
+    return found
+
+
+testlist = [1,2,32,8,17,19,42,13,0]
+# print(binarySearchRec(testlist,41))
+# print(binarySearchRec(testlist,42))
+
+
+def bubbleSort(alist:List):
+    pass
