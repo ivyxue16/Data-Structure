@@ -26,3 +26,15 @@ def insertionSort(alist):
 alist = [54,26,93,17,31,44,55,20]
 insertionSort(alist)
 print(alist)
+
+
+def selectionSort(alist):
+    pass
+
+
+def mergeSort(alist):
+    pass
+
+def heapSort(alist):
+    pass
+
