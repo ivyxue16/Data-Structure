@@ -25,11 +25,20 @@ def insertionSort(alist):
 
 alist = [54,26,93,17,31,44,55,20]
 insertionSort(alist)
-print(alist)
+# print(alist)
 
 
 def selectionSort(alist):
-    pass
+    for i in range(len(alist)-1,0,-1):
+        posMax = 0
+        for loc in range(1,i+1):
+            if alist[loc] > alist[posMax]:
+                posMax = loc
+        temp = alist[i]
+        alist[i] = alist[posMax]
+        alist[posMax] = temp
+selectionSort(alist)
+print(alist)
 
 
 def mergeSort(alist):
