@@ -1,5 +1,7 @@
 from typing import List
 
+
+
 def bubbleSort(alist:List):
     '''
     Time Complexity: O(n^2)
@@ -12,6 +14,8 @@ def bubbleSort(alist:List):
                 # alist[i] = temp
                 alist[i],alist[i+1] = alist[i+1],alist[i]   # Python supports direct change
                 
+
+
 
 def selectionSort(alist:List):
     '''
@@ -28,6 +32,8 @@ def selectionSort(alist:List):
 
 
 
+
+
 def insertionSort(alist:List):
     for i in range(1,len(alist)):
         currentvalue = alist[i]
@@ -36,6 +42,8 @@ def insertionSort(alist:List):
             alist[position] = alist[position-1]
             position = position - 1
         alist[position] = currentvalue
+
+
 
 
 def shellSort(alist:List):
@@ -93,12 +101,14 @@ def mergeSort(alist:List):
         print('Merging ', alist)
 
 
+
+
 def quickSort(alist):
     quickSortHelper(alist,0,len(alist)-1)
 
 def quickSortHelper(alist,first,last):
     '''
-    Use recursion to sort list with smaller size
+    Use recursion to sort list with smaller list
     '''
     if first < last:
         splitPoint = partition(alist,first,last)
@@ -122,7 +132,6 @@ def partition(alist,first,last):
             alist[leftmark],alist[rightmark] = alist[rightmark],alist[leftmark]
         
     alist[first], alist[rightmark] = alist[rightmark],alist[first]
-
     return rightmark
 
 
@@ -153,5 +162,5 @@ if __name__ == "__main__":
     # mergeSort(alist)
     # print(alist)
 
-    quickSort(alist)
+    # quickSort(alist)
     print(alist)
