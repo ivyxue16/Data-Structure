@@ -16,6 +16,19 @@ def bubbleSort(alist:List):
                 
 
 
+def shortbubbleSort(alist:List):
+    exchange = True
+    passnum = len(alist) - 1
+    while exchange and passnum > 0:
+        exchange = False
+        for i in range(passnum):
+            if alist[i] > alist[i+1]: 
+                exchange = True
+                alist[i],alist[i+1] = alist[i+1],alist[i]
+
+        passnum = passnum - 1
+
+
 
 def selectionSort(alist:List):
     '''
@@ -150,6 +163,9 @@ if __name__ == "__main__":
     # bubbleSort(alist)
     # print(alist)
 
+    # shortbubbleSort(alist)
+    # print(alist)
+
     # selectionSort(alist)
     # print(alist)
 
@@ -163,4 +179,6 @@ if __name__ == "__main__":
     # print(alist)
 
     # quickSort(alist)
-    print(alist)
+    # print(alist)
+
+    
