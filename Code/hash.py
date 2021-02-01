@@ -1,3 +1,4 @@
+
 def hash(astring:str, tablesize:int):
     '''
     Hash function realization
