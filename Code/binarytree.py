@@ -1,4 +1,4 @@
-
+from ADT_Stack import Stack
 '''
 Using recursive list to represent Binary Tree.
 '''
@@ -38,7 +38,7 @@ def getRightChild(root):
 
 
 
-class BinaryTree2:
+class BinaryTree:
     def __init__(self,rootObj):
         self.key = rootObj
         self.leftChild = None   # BinaryTree object
@@ -46,17 +46,17 @@ class BinaryTree2:
 
     def insertLeft(self,newNode):
         if self.leftChild == None:
-            self.leftChild = BinaryTree2(newNode)
+            self.leftChild = BinaryTree(newNode)
         else:
-            t = BinaryTree2(newNode)
+            t = BinaryTree(newNode)
             t.leftChild = self.leftChild
             self.leftChild = t
 
     def insertRight(self,newNode):
         if self.rightChild == None:
-            self.rightChild = BinaryTree2(newNode)
+            self.rightChild = BinaryTree(newNode)
         else:
-            t = BinaryTree2(newNode)
+            t = BinaryTree(newNode)
             t.rightChild = self.rightChild
             self.rightChild = t
     
@@ -73,11 +73,40 @@ class BinaryTree2:
         self.key = newVal
 
 
+def buildParseTree(expstr:str):
+    explist = expstr.split()
+    pstack = Stack()
+    eTree = BinaryTree('')
+    pstack.push(eTree)
+    currentTree = eTree
+    for i in explist:
+        if i == "(":
+            currentTree.insertLeft('')
+            pstack.push(currentTree)
+            currentTree = currentTree.getLeftChild()
+        elif i not in ["+","-","*","/",")"]:
+            currentTree.setRootVal(int(i))
+            parent = pstack.pop()
+            currentTree = parent
+        elif i in ["+","-","*","/"]:
+            currentTree.setRootVal(i)
+            currentTree.insertRight('')
+            pstack.push(currentTree)
+            currentTree = currentTree.getRightChild()
+        elif i == ")":
+            currentTree = pstack.pop()
+        else:
+            raise ValueError
+    return eTree
+
+
+
+
 
 
 
 if __name__ == "__main__":
-    '''
+    
     r = BinaryTree1(3)
     insertLeft(r,4)
     insertLeft(r,5)
@@ -91,10 +120,17 @@ if __name__ == "__main__":
     insertLeft(l,11)
     print(r)
     print(getRightChild(getRightChild(r)))
-    '''
+    
 
-    r = BinaryTree2('a')
+    
+    r = BinaryTree('a')
     r.insertLeft('b')
     r.insertRight('c')
     r.getLeftChild().setRootVal('hello')
     r.getRightChild().setRootVal('d')
+    
+
+    fpexp = '( 3  + 5 * 7 )'
+    eTree = buildParseTree(fpexp)
+    # print(eTree.getRootVal())
+    # print(eTree.leftChild.getRootVal())
