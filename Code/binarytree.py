@@ -77,7 +77,7 @@ class BinaryTree2:
 
 
 if __name__ == "__main__":
-    
+    '''
     r = BinaryTree1(3)
     insertLeft(r,4)
     insertLeft(r,5)
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     insertLeft(l,11)
     print(r)
     print(getRightChild(getRightChild(r)))
-
+    '''
 
     r = BinaryTree2('a')
     r.insertLeft('b')
