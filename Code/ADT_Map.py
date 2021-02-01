@@ -6,8 +6,10 @@ class HashTable:
 
     def hashfunction(self,key):
         return key % self.size
+
     def rehash(self,oldhash):
         return (oldhash + 1) % self.size
+
     def put(self,key,data):
         hashvalue = self.hashfunction(key)
         if self.slots[hashvalue] == None:
@@ -26,6 +28,7 @@ class HashTable:
                     self.data[nextslot] = data
                 else:
                     self.data[nextslot] = data # replace
+                    
     def get(self,key):
         startslot = self.hashfunction(key)
         position = startslot
