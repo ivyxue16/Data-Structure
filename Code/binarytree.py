@@ -1,4 +1,7 @@
 from ADT_Stack import Stack
+import operator
+
+
 '''
 Using recursive list to represent Binary Tree.
 '''
@@ -75,62 +78,79 @@ class BinaryTree:
 
 def buildParseTree(expstr:str):
     explist = expstr.split()
-    pstack = Stack()
+    pStack = Stack()
     eTree = BinaryTree('')
-    pstack.push(eTree)
+    pStack.push(eTree)
     currentTree = eTree
     for i in explist:
         if i == "(":
             currentTree.insertLeft('')
-            pstack.push(currentTree)
+            pStack.push(currentTree)
             currentTree = currentTree.getLeftChild()
-        elif i not in ["+","-","*","/",")"]:
-            currentTree.setRootVal(int(i))
-            parent = pstack.pop()
+        elif i not in '+-*/)':
+            currentTree.setRootVal(eval(i))
+            parent = pStack.pop()
             currentTree = parent
-        elif i in ["+","-","*","/"]:
+        elif i in '+-*/':
             currentTree.setRootVal(i)
             currentTree.insertRight('')
-            pstack.push(currentTree)
+            pStack.push(currentTree)
             currentTree = currentTree.getRightChild()
         elif i == ")":
-            currentTree = pstack.pop()
+            currentTree = pStack.pop()
         else:
             raise ValueError
     return eTree
 
 
-
+def evaluate(parseTree):
+    opers = {"+":operator.add,"-":operator.sub,"*":operator.mul,"/":operator.truediv}
+    leftC = parseTree.getLeftChild()
+    rightC = parseTree.getRightChild()
+    if leftC and rightC:
+        fn = opers[parseTree.getRootVal()]
+        return fn(evaluate(leftC),evaluate(rightC))
+    else:
+        return parseTree.getRootVal()
 
 
 
 
 if __name__ == "__main__":
-    
+    '''
     r = BinaryTree1(3)
     insertLeft(r,4)
     insertLeft(r,5)
     insertRight(r,6)
     insertRight(r,7)
     l = getLeftChild(r)
-    print(l)
+    # print(l)
 
     setRootVal(l,9)
-    print(r)
+    # print(r)
     insertLeft(l,11)
-    print(r)
-    print(getRightChild(getRightChild(r)))
+    # print(r)
+    # print(getRightChild(getRightChild(r)))
     
 
     
     r = BinaryTree('a')
     r.insertLeft('b')
     r.insertRight('c')
-    r.getLeftChild().setRootVal('hello')
-    r.getRightChild().setRootVal('d')
+    r.getRightChild().setRootVal('hello')
+    print(r.getRightChild().getRootVal())
     
-
-    fpexp = '( 3  + 5 * 7 )'
+    '''
+    # fpexp = ' ( ( 7 + 3 ) * ( 5 - 2 ) ) '
+    fpexp = '( 3 +  ( 5 * 7 ) )'
     eTree = buildParseTree(fpexp)
     # print(eTree.getRootVal())
     # print(eTree.leftChild.getRootVal())
+
+    # op = operator.add
+    # print(op(1,2))
+    print(evaluate(eTree))
+
+    # x = ( ( 7 + 3 ) * ( 5 - 2 ) )
+    # print(x)
+
