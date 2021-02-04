@@ -51,7 +51,9 @@ class BinHeap:
         i = len(alist) // 2
         self.currentsize = len(alist)
         self.heaplist = [0] + alist[:]
+        print(self.heaplist,i)
         while i > 0:
+            print(self.heaplist,i)
             self.percDown(i)
             i = i - 1 
         print(self.heaplist,i)
