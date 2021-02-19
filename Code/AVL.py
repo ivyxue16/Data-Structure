@@ -2,12 +2,16 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None # Node
         self.size = 0
+        self.height = self._height(self)
+        self.balanceFactor = 0
+
     def length(self):
         return self.size
     def __len__(self):
         return self.size
     def __iter__(self):   # for Node in BST
         return self.root.__iter__()
+    
 
     def put(self,key,val):
         if self.root:
@@ -22,12 +26,32 @@ class BinarySearchTree:
                 self._put(key,val,currentNode.leftchild)
             else:
                 currentNode.leftchild = TreeNode(key,val,parent=currentNode)
+                self.updateBalance(currentNode.leftchild)
         else:
             if currentNode.hasRightchild():
                 self._put(key,val,currentNode.rightchild)
             else:
-                currentNode.rightchild = TreeNode(key,val,parent=currentNode)
+                currsentNode.rightchild = TreeNode(key,val,parent=currentNode)
+                self.updateBalance(currentNode.rightchild)
     
+
+    def updateBalance(self,node):
+        if node.balanceFactor > 1 or node.balanceFactor < -1:
+            self.rebalance(node)
+            return 
+        if node.parent != None:
+            if node.isLeftchild():
+                node.parent.balanceFactor += 1
+            elif node.isRightchild():
+                node.parent.balanceFactor -= 1
+            
+            if node.parent.balanceFactor != 0:
+                self.updateBalance(node.parent)
+    
+    def rebalance(self,node):
+        pass
+        
+
     def __setitem__(self,k,v):
         self.put(k,v)
     
@@ -102,9 +126,7 @@ class BinarySearchTree:
                     currentNode.parent.rightchild = currentNode.rightchild
                 else: 
                     currentNode.replaceNodeData(currentNode.rightchild.key,currentNode.rightchild.payload,currentNode.rightchild.leftchild,currentNode.rightchild.rightchild)
-           
-
-
+    
 
 class TreeNode:
     def __init__(self,key,val,left=None,right=None,parent=None):
@@ -203,4 +225,4 @@ if __name__ == "__main__":
     myTree[6] = 'yellow'
     myTree[2] = 'at'
 
-    print(myTree[6]) # get method
+    print(myTree[3]) # get method
