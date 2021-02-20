@@ -31,9 +31,10 @@ class BinarySearchTree:
             if currentNode.hasRightchild():
                 self._put(key,val,currentNode.rightchild)
             else:
-                currsentNode.rightchild = TreeNode(key,val,parent=currentNode)
+                currentNode.rightchild = TreeNode(key,val,parent=currentNode)
                 self.updateBalance(currentNode.rightchild)
-    
+    def __setitem__(self,k,v):
+        self.put(k,v)
 
     def updateBalance(self,node):
         if node.balanceFactor > 1 or node.balanceFactor < -1:
@@ -48,13 +49,58 @@ class BinarySearchTree:
             if node.parent.balanceFactor != 0:
                 self.updateBalance(node.parent)
     
-    def rebalance(self,node):
-        pass
         
+    def leftRotate(self,rotRoot):
+        newRoot = rotRoot.rightchild
+        rotRoot.rightchild = newRoot.leftchild
+        if newRoot.leftchild != None:
+            newRoot.leftchild.parent = rotRoot
+        newRoot.parent = rotRoot.parent
+        if rotRoot.isRoot():
+            self.root = newRoot
+        else:
+            if rotRoot.isLeftchild:
+                rotRoot.parent.leftchild = newRoot
+            else:
+                rotRoot.parent.rightchild = newRoot
+        newRoot.leftchild = rotRoot
+        rotRoot.parent = newRoot
+        rotRoot.balanceFactor = rotRoot.balanceFactor + 1 - min(newRoot.balanceFactor,0)
+        newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor,0)
 
-    def __setitem__(self,k,v):
-        self.put(k,v)
+    def rightRotate(self,rotRoot):
+        newRoot = rotRoot.leftchild
+        rotRoot.leftchild = newRoot.rightchild
+        if newRoot.rightchild != None:
+            newRoot.rightchild.parent = rotRoot
+        newRoot.parent = rotRoot.parent 
+        if rotRoot.isRoot():
+            self.root = newRoot
+        else :
+            if rotRoot.isLeftchild():
+                rotRoot.parent.leftchild = newRoot
+            else :
+                rotRoot.parent.rightchild = newRoot
+        newRoot.rightchild = rotRoot
+        rotRoot.parent = newRoot
+        rotRoot.balanceFactor = rotRoot.balanceFactor + 1 - min(newRoot.balanceFactor,0)
+        newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor,0)
     
+    def rebalance(self,node):
+        if node.balanceFactor < 0:
+            if node.rightchild.balanceFactor > 0:
+                self.rightRotate(node.rightchild)
+                self.leftRotate(node)
+            else: 
+                self.leftRotate(node)
+        elif node.balanceFactor > 0:
+            if node.leftchild.balanceFactor < 0:
+                self.leftRotate(node.leftchild)
+                self.rightRotate(node)
+            else :
+                self.rightRotate(node)
+                
+
     def get(self,key):
         res = self._get(key,self.root)
         if res:
