@@ -2,7 +2,6 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None # Node
         self.size = 0
-        self.height = self._height(self)
         self.balanceFactor = 0
 
     def length(self):
