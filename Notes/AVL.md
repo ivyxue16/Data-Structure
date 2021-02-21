@@ -6,7 +6,7 @@ AVL树能自动维持平衡， 以发明者G.M.Adelson-Velskii和E.M.Landis的�
 
 AVL与普通二叉搜索树都能实现映射抽象数据类型的方式，唯一的区别是性能。AVL树需要记录每个节点的平衡因子，即左右子树的高度差。
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/unbalanced.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/unbalanced.png)
 
 <center> <font color=black>带平衡因子的右倾树</font></center>
 
@@ -21,7 +21,7 @@ $$
 
 平衡树：平衡因子为-1、0，1
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/worst-case-AVL.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/worst-case-AVL.png)
 
 
 
@@ -89,7 +89,7 @@ $$ h = 1.44logN_h$$
 
 
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/simple-unbalanced.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/simple-unbalanced.png)
 
 <center> <font color=black>通过左旋让失衡的树恢复平衡</font></center>
 
@@ -103,11 +103,13 @@ $$ h = 1.44logN_h$$
 
 
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/rotate-right.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/rotate-right.png)
 
 <center> <font color=black>通过右旋让失衡的树恢复平衡</font></center>
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/balance-factor-derivation.png)
+
+
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/balance-factor-derivation.png)
 
 <center> <font color=black>左旋</font></center>
 
@@ -171,11 +173,11 @@ newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor,0)
 
 #### 双旋
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/hard-unbalanced.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/hard-unbalanced.png)
 
 <center> <font color=black>更难平衡的树</font></center>
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/bad-rotatation.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/bad-rotatation.png)
 
 <center> <font color=black>左旋后，树朝另一个方向失衡</font></center>
 
@@ -185,7 +187,7 @@ newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor,0)
 
 
 
-![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/rotate-left-right.png)
+![IMAGE](https://raw.githubusercontent.com/ivoryfish33/Data-Structure/main/Graph/rotate-left-right.png)
 
 <center> <font color=black>先右旋，再左旋</font></center>
 
