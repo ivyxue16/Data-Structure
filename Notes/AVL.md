@@ -57,9 +57,51 @@ $$ h=\frac{logN_h+1-2log\phi+\frac{1}{2}log5}{log\phi}$$
 $$ h = 1.44logN_h$$
 在任何时间，AVL树的高度都等于节点数取对数再乘以一个常数(1.44)，对于搜索AVL来说是好事，因为时间复杂度被限制为$O(logN)$
 
+### 往树中插人一个键
+
+所有新键都是以叶子节点插入的，因为新叶子节点的平衡因子是零，所以新插节点没有什么限制条件。但插入新节点后，必须更新父节点的平衡因子。新的叶子节点对其父节点平衡因子的影响取决于它是左子节点还是右子节点。
+
+- 如果是右子节点，父节点的平衡因子减一。
+
+- 如果是左子节点，则父节点的平衡因子加一。
+
+  
+
+这个关系可以递归地应用到每个祖先，直到根节点。既然更新平衡因子是递归过程，就来检查以下两种基本情况：
+
+- 递归调用抵达根节点；
+
+- 父节点的平衡因子调整为零；可以确信，如果子树的平衡因子为零，那么祖先节点的平衡因子将不会有变化。
+
+### 树的再平衡
+
+为了让AVL树恢复平衡，需要在树上进行一次或多次旋转：
+
+#### 左旋
+
+- 将右子节点(节点B)提升为子树的根节点。  
+
+- 将旧根节点(节点A)作为新根节点的左子节点。  
+
+- 如果新根节点(节点B)已经有一个左子节点，将其作为新左子节点(节点A)的右子节  点。注意，因为节点B之前是节点A的右子节点，所以此时节点A必然没有右子节点。  因此，可以为它添加新的右子节点，而无须过多考虑。  
+
+
+
+
+
 ![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/simple-unbalanced.png)
 
 <center> <font color=black>通过左旋让失衡的树恢复平衡</font></center>
+
+#### 右旋
+
+- 将左子节点(节点C)提升为子树的根节点。  
+
+- 将旧根节点(节点E)作为新根节点的右子节点。  
+
+- 如果新根节点(节点C)已经有一个右子节点(节点D)，将其作为新右子节点(节点E)  的左子节点。注意，因为节点C之前是节点E的左子节点，所以此时节点E必然没有左子节点。因此，可以为它添加新的左子节点，而无须过多考虑。  
+
+
 
 ![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/rotate-right.png)
 
@@ -69,6 +111,66 @@ $$ h = 1.44logN_h$$
 
 <center> <font color=black>左旋</font></center>
 
+#### 更新平衡因子
+
+根节点为$$x$$的子树，高度记为$$h_x$$，由定义可知：
+$$
+newBal(B) = h_A - h_c
+$$
+
+$$
+oldBal(B) = h_A - h_D
+$$
+
+
+
+旧$$h_D$$也可以写为$$1+max(h_C,h_E)$$，即两棵子树中高度的较大值+1，因为$$h_C$$与$$h_E$$不变，代入第二个等式，得到
+$$
+oldBal(B) = h_A-(1+max(h_C,h_E))
+$$
+
+$$
+newBal(B) - oldBal(B) =  h_A - h_C - (h_A - h_D)
+$$
+
+$$
+newBal(B) - oldBal(B) =  h_A - h_C - (h_A - (1+max(h_C,h_E)))
+$$
+
+$$
+newBal(B) - oldBal(B) =  1+max(h_C,h_E)- h_C
+$$
+
+
+
+将$$oldBal(B)$$移到等式右边，利用$$max(a,b)-c=max(a-c,b-c)$$可得：
+$$
+newBal(B)  = oldBal(B) + 1+max(h_C- h_C,h_E- h_C)
+$$
+$$h_E- h_C = -h_D$$ 
+
+最终可得：
+$$
+newBal(B)  = oldBal(B) + 1+max(0,-oldBal(D))
+$$
+
+$$
+newBal(B)  = oldBal(B) + 1 - min(0,oldBal(D))
+$$
+
+对应的代码为
+
+```python
+rotRoot.BalanceFactor = rotRoot.BalanceFactor + 1 - min(0,newRoot.BalanceFactor)
+newRoot.balanceFactor = newRoot.balanceFactor + 1 + max(rotRoot.balanceFactor,0)
+```
+
+
+
+
+
+#### 双旋
+
 ![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/hard-unbalanced.png)
 
 <center> <font color=black>更难平衡的树</font></center>
@@ -77,9 +179,34 @@ $$ h = 1.44logN_h$$
 
 <center> <font color=black>左旋后，树朝另一个方向失衡</font></center>
 
+
+
+ 围绕节点C做一次右旋，  再围绕节点A做一次左旋，就能让子树恢复平衡。  
+
+
+
 ![IMAGE](/Users/ivy/Documents/GitHub/Data-Structure/Data-Structure/Graph/rotate-left-right.png)
 
 <center> <font color=black>先右旋，再左旋</font></center>
+
+  
+
+要解决这种问题，必须遵循以下规则。  
+
+- 如果子树需要左旋，首先检查右子树的平衡因子。如果右子树左倾，就对右子树做一次右旋，再围绕原节点做一次左旋。  
+- 如果子树需要右旋，首先检查左子树的平衡因子。如果左子树右倾，就对左子树做一次左旋，再围绕原节点做一次右旋。  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
